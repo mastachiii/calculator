@@ -1,0 +1,31 @@
+button{
+    background-color: grey;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+#display{
+    width: 1000px;
+    height: 100px;
+    background-color: orange;
+}
+
+#buttons-left{
+    display: flex;
+    flex-direction: column;
+    width:1000px
+}
+
+#extra-buttons{
+    width: 320px;
+}
+
+#numbers{
+    width: 320px;
+}
+
+#buttons-right{
+    display: flex;
+    flex-direction: column;
+}
