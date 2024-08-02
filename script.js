@@ -64,6 +64,7 @@ let Calculator = {
         
         leftOperand: '',
         rightOperand: '',
+        equation: '',
         result: 0
     },
 
@@ -77,34 +78,67 @@ let Calculator = {
 }
 
 
-numberButtons.addEventListener('mousedown', inputNum);
-operatorButtons.addEventListener('mousedown', inputNum);
-extraButtons.addEventListener('mousedown', inputNum)
+numberButtons.addEventListener('mousedown', foo);
+operatorButtons.addEventListener('mousedown', foo);
+extraButtons.addEventListener('mousedown', foo)
 
 // DETERMINES IF LEFT OR RIGHT HAND OPERAND GETS CHANGED
 
 let mode = 0
+  , operation;
 
-function inputNum (e){
 
-    let currentNum;
+function foo (e){
 
-    if (String(+e.target.textContent) !== 'NaN'){ currentNum = e.target.textContent; }
+    let currentNum = String(+e.target.textContent) != 'NaN' ? e.target.textContent : null
+      , currentOp = String(+e.target.textContent) === 'NaN' ? e.target.textContent.split(' ').join('') : null;
 
-    if (String(+e.target.textContent) === 'NaN' && Calculator.values.leftOperand !== '') mode = 1;
+    if (currentNum != null){
 
-    if(currentNum === undefined) return
+        switch (mode){
 
-    switch (mode){
+            case 0:
+                Calculator.values.leftOperand += currentNum;
+                Calculator.values.equation += currentNum;
+                break;
 
-        case 0:
-            Calculator.values.leftOperand += currentNum;
-            break;
+            default:
+                Calculator.values.rightOperand += currentNum;
+                Calculator.values.equation += currentNum;
+        }
 
-        case 1: 
-            Calculator.values.rightOperand += currentNum
-            break;
+    } else if (Calculator.values.leftOperand != '' && currentOp != '='){
+
+        operation = currentOp;
+        mode = 1;
+        Calculator.values.equation += e.target.textContent;
+
     }
 
-    
+    displayInput.textContent = Calculator.values.equation;
+
+    if (currentOp === '=') getResult(operation);
+}
+
+function getResult (operator){
+
+    switch (operator){
+
+        case '+':
+            Calculator.values.result = +Calculator.values.leftOperand + +Calculator.values.rightOperand;
+            break;
+            
+        case '-':
+            Calculator.values.result = +Calculator.values.leftOperand - Calculator.values.rightOperand;
+            break;
+
+        case '×':
+            Calculator.values.result = +Calculator.values.leftOperand * Calculator.values.rightOperand;
+            break;
+        
+        case '÷':
+            Calculator.values.result = +Calculator.values.leftOperand / +Calculator.values.rightOperand;
+    }
+
+    displayInput.textContent = Calculator.values.result;
 }
