@@ -66,7 +66,13 @@ let Calculator = {
     operation: '',
     mode: 0,
     result: ''
-}
+};
+
+numberButtons.addEventListener('mousedown', inputNumbers);
+
+operatorButtons.addEventListener('mousedown', useOperators);
+
+extraButtons.addEventListener('mousedown', useExtraFunctions);
 
 function inputNumbers (e){
 
@@ -138,9 +144,8 @@ function useOperators (e){
         Calculator.rightOperand = '';
 
         return;
-    };
 
-    if (Calculator.leftOperand != '' && e.target.textContent !== ' = '){
+    } else if (Calculator.leftOperand != '' && e.target.textContent !== ' = '){
 
         Calculator.operation = '';
 
@@ -189,21 +194,15 @@ function useExtraFunctions (e){
 
 function checkResultLength (){
 
-    console.log(String(displayInput.textContent.split(' ').join('')).length)
     if (String(displayInput.textContent.split(' ').join('')).length >= 6){
-        displayInput.style.fontSize = '60px'
+
+        displayInput.style.fontSize = '60px';
+
     } else{
-        displayInput.style.fontSize = '120px'
+
+        displayInput.style.fontSize = '120px';
     }
 }
-
-
-numberButtons.addEventListener('mousedown', inputNumbers);
-
-operatorButtons.addEventListener('mousedown', useOperators);
-
-extraButtons.addEventListener('mousedown', useExtraFunctions);
-
 //KEYBOARD FUNCTIONALITY
 
 document.body.addEventListener('keydown', inputNumbersKeyBoard);
@@ -228,6 +227,7 @@ function inputNumbersKeyBoard (e){
             if (String(Calculator.leftOperand).length >= 9) return;
 
             Calculator.leftOperand += input;
+
             break;
 
         default:
@@ -245,11 +245,10 @@ function inputNumbersKeyBoard (e){
 
 function useOperatorsKeyBoard (e){
 
-    let oppArr = ['+', '-', 'x', '/', '%', '='];
+    let oppArr = ['+', '-', 'x', '/', '%', '=']
+      , input = e.key;;
 
-    if (!(oppArr.includes(e.key))) return;
-
-    let input = e.key;
+    if (!(oppArr.includes(input))) return;
 
     if (input === '=' && Calculator.rightOperand != '' || Calculator.leftOperand != '' && Calculator.rightOperand != ''){
 
@@ -320,8 +319,11 @@ function useExtraFunctionsKeyBoard (e){
 
         case 'Backspace':
             if (Calculator.mode === 0 && Calculator.result !== ''){
+
                 Calculator.leftOperand = String(Calculator.leftOperand).slice(0, -1);
+
             } else {
+                
                 Calculator.rightOperand = String(Calculator.rightOperand).slice(0, -1);
             } 
     }
