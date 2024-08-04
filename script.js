@@ -24,7 +24,6 @@ function changeColorDown (e){
 
         case 'numbers':
             e.target.style.backgroundColor = '#fbfaf9';
-            // test.append(e.target.textContent)
             break;
 
         case 'buttons-right':
@@ -203,6 +202,7 @@ function checkResultLength (){
         displayInput.style.fontSize = '120px';
     }
 }
+
 //KEYBOARD FUNCTIONALITY
 
 document.body.addEventListener('keydown', inputNumbersKeyBoard);
