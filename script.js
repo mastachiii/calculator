@@ -77,8 +77,6 @@ function inputNumbers (e){
 
     if (e.target.tagName != 'BUTTON') return;
 
-    // if (Calculator.leftOperand === '' && +e.target.textContent === 0 || Calculator.rightOperand === '' && +e.target.textContent === 0) return;
-
     switch (Calculator.mode){
 
         case 0:
@@ -106,7 +104,7 @@ function useOperators (e){
 
     if (e.target.tagName != 'BUTTON') return;
 
-    if (e.target.textContent === ' = ' && Calculator.rightOperand != '' || Calculator.leftOperand != '' && Calculator.rightOperand != ''){
+    if (e.target.textContent === ' = ' && Calculator.rightOperand !== '' || Calculator.leftOperand !== '' && Calculator.rightOperand !== ''){
 
         switch (Calculator.operation){
 
@@ -134,17 +132,19 @@ function useOperators (e){
 
         displayInput.textContent = `${Calculator.result}`;
 
-        checkResultLength()
-
-        Calculator.operation = e.target.textContent != ' = ' ? e.target.textContent : Calculator.operation;
+        Calculator.operation = e.target.textContent != ' = ' ? e.target.textContent.split(' ').join('') : Calculator.operation;
         
         Calculator.leftOperand = Calculator.result;
         
         Calculator.rightOperand = '';
 
+        Calculator.mode++;
+
+        checkResultLength();
+
         return;
 
-    } else if (Calculator.leftOperand != '' && e.target.textContent !== ' = '){
+    } else if (Calculator.leftOperand !== '' && e.target.textContent !== ' = '){
 
         Calculator.operation = '';
 
@@ -217,8 +217,6 @@ function inputNumbersKeyBoard (e){
 
     let input = e.key;    
 
-    // if (Calculator.leftOperand === '' && +input === 0 || Calculator.rightOperand === '' && +input === 0) return;
-
     switch (Calculator.mode){
 
         case 0:
@@ -250,7 +248,7 @@ function useOperatorsKeyBoard (e){
 
     if (!(oppArr.includes(input))) return;
 
-    if (input === '=' && Calculator.rightOperand != '' || Calculator.leftOperand != '' && Calculator.rightOperand != ''){
+    if (input === '=' && Calculator.rightOperand !== '' || Calculator.leftOperand !== '' && Calculator.rightOperand !== ''){
 
         switch (Calculator.operation){
 
@@ -289,7 +287,7 @@ function useOperatorsKeyBoard (e){
         return;
     };
 
-    if (Calculator.leftOperand != '' && input !== ' = '){
+    if (Calculator.leftOperand != '' && input !== '='){
 
         Calculator.operation = '';
 
