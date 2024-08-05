@@ -77,7 +77,7 @@ function inputNumbers (e){
 
     if (e.target.tagName != 'BUTTON') return;
 
-    if (Calculator.leftOperand === '' && +e.target.textContent === 0 || Calculator.rightOperand === '' && +e.target.textContent === 0) return;
+    // if (Calculator.leftOperand === '' && +e.target.textContent === 0 || Calculator.rightOperand === '' && +e.target.textContent === 0) return;
 
     switch (Calculator.mode){
 
@@ -217,7 +217,7 @@ function inputNumbersKeyBoard (e){
 
     let input = e.key;    
 
-    if (Calculator.leftOperand === '' && +input === 0 || Calculator.rightOperand === '' && +input === 0) return;
+    // if (Calculator.leftOperand === '' && +input === 0 || Calculator.rightOperand === '' && +input === 0) return;
 
     switch (Calculator.mode){
 
